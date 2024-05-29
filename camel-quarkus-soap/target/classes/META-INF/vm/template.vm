@@ -1,5 +1,0 @@
-<xmlResult>
-   <document>
-     <message>${headers.response}</message>
-   </document>
-</xmlResult>

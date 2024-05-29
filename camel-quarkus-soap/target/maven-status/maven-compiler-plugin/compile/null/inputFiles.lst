@@ -1,7 +1,0 @@
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/camel/bean/TestSoapWebEndpoint.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/camel/processor/GetUserInfo.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/camel/processor/Login.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/camel/route/JMSRoute.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/camel/route/WebRouteLogin.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/service/web/sei/SimpleSoap.java
-/Users/pancho/Desktop/codes/tps/poc-opendev/tps-poc-soap-master/src/main/java/com/tps/esb/service/web/sei/User.java
