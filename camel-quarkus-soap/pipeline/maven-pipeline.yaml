@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: camel-quarkus-rest
+  name: camel-quarkus-soap
 spec:
   params:
     - default: 'https://github.com/panchoraposo/poc-tps.git'
@@ -12,7 +12,7 @@ spec:
       description: source branch to build from
       name: source-branch
       type: string
-    - default: 'camel-quarkus-rest'
+    - default: 'camel-quarkus-soap'
       type: string
       name: CONTEXT_DIR
     - default: 'quay.io/fraposo/$(params.CONTEXT_DIR):$(context.pipelineRun.uid)'
@@ -23,7 +23,7 @@ spec:
       default: "fraposo"
     - name: quay-io-repository
       type: string
-      default: "camel-quarkus-rest"
+      default: "camel-quarkus-soap"
     - name: quay-io-image-tag-name
       type: string
       default: "latest"

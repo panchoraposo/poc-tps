@@ -1,10 +1,10 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: ci-camel-quarkus-rest
+  name: ci-camel-quarkus-soap
 spec:
   pipelineRef:
-    name: camel-quarkus-rest
+    name: camel-quarkus-soap
   workspaces:
   - name: source-folder
     persistentVolumeClaim:
