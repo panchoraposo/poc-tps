@@ -1,0 +1,81 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: maven-build
+spec:
+  params:
+    - default: 'https://github.com/panchoraposo/poc-tps.git'
+      description: source repo that contains the application code
+      name: source-repo
+      type: string
+    - default: main
+      description: source branch to build from
+      name: source-branch
+      type: string
+    - default: 'camel-quarkus-rest'
+      type: string
+      name: CONTEXT_DIR
+    - default: 'quay.io/fraposo/poc-tps'
+      type: string
+      name: IMAGE
+  
+  tasks:
+  - name: git-clone
+    params:
+      - name: url
+        value: $(params.source-repo)
+      - name: revision
+        value: $(params.source-branch)
+    taskRef:
+      kind: ClusterTask
+      name: git-clone
+    workspaces:
+      - name: output
+        workspace: source-folder
+
+  - name: package
+    taskRef:
+      name: maven
+    params:
+    - name: CONTEXT_DIR
+      value: $(params.CONTEXT_DIR)
+    - name: GOALS
+      value:
+        - clean
+        - package
+    runAfter: ["git-clone"]
+    workspaces:
+    - name: output
+      workspace: source-folder
+    #- name: maven-settings
+    #  workspace: maven-settings
+
+  - name: tests
+    taskRef:
+      name: maven
+    runAfter: ["package"]
+    params:
+    - name: GOALS
+      value: ["verify"]
+    - name: CONTEXT_DIR
+      value: $(params.CONTEXT_DIR)
+    workspaces:
+    - name: output
+      workspace: source-folder
+
+  - name: build-image
+    taskRef:
+      name: buildah
+    runAfter: ["tests"]
+    params:
+      - name: IMAGE
+        value: $(params.IMAGE)
+      - name: CONTEXT
+        value: $(params.CONTEXT_DIR)
+    workspaces:
+      - name: source
+        workspace: source-folder
+
+  workspaces:
+  - name: source-folder
+  #- name: maven-settings

@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: poc-tps
+  namespace: poc-tps
+  #generateName: poc-tps-
+spec:
+  pipelineRef:
+    name: maven-build
+  workspaces:
+  - name: source-folder
+    persistentVolumeClaim:
+      claimName: maven-repo-pvc
